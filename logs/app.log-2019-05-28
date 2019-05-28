@@ -1,0 +1,71 @@
+[2019-05-28T11:39:23.378] [INFO] default - Server running at http://0.0.0.0:8360
+[2019-05-28T11:39:23.380] [INFO] default - ThinkJS version: 3.2.10
+[2019-05-28T11:39:23.380] [INFO] default - Environment: production
+[2019-05-28T11:39:23.380] [INFO] default - Workers: 1
+[2019-05-28T11:39:26.326] [ERROR] default - { Error: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1191:14)
+    --------------------
+    at Protocol._enqueue (/root/works/firekylin/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at Protocol.handshake (/root/works/firekylin/node_modules/mysql/lib/protocol/Protocol.js:51:23)
+    at PoolConnection.connect (/root/works/firekylin/node_modules/mysql/lib/Connection.js:119:18)
+    at Pool.getConnection (/root/works/firekylin/node_modules/mysql/lib/Pool.js:48:16)
+    at Promise (/root/works/firekylin/node_modules/think-helper/index.js:83:10)
+    at new Promise (<anonymous>)
+    at args (/root/works/firekylin/node_modules/think-helper/index.js:82:12)
+    at ThinkMysql.getConnection (/root/works/firekylin/node_modules/think-mysql/index.js:89:69)
+    at debounceInstance.debounce (/root/works/firekylin/node_modules/think-mysql/index.js:229:21)
+    at Promise.resolve.then (/root/works/firekylin/node_modules/think-debounce/index.js:19:16)
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 3306,
+  fatal: true }
+[2019-05-28T13:46:37.900] [ERROR] default - { Error: ER_NO_SUCH_TABLE: Table 'mysql.fk_options' doesn't exist
+    at Query.Sequence._packetToError (/root/works/firekylin/node_modules/mysql/lib/protocol/sequences/Sequence.js:47:14)
+    at Query.ErrorPacket (/root/works/firekylin/node_modules/mysql/lib/protocol/sequences/Query.js:77:18)
+    at Protocol._parsePacket (/root/works/firekylin/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/root/works/firekylin/node_modules/mysql/lib/protocol/Parser.js:433:10)
+    at Parser.write (/root/works/firekylin/node_modules/mysql/lib/protocol/Parser.js:43:10)
+    at Protocol.write (/root/works/firekylin/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/root/works/firekylin/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/root/works/firekylin/node_modules/mysql/lib/Connection.js:525:10)
+    at emitOne (events.js:116:13)
+    at Socket.emit (events.js:211:7)
+    --------------------
+    at Protocol._enqueue (/root/works/firekylin/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at PoolConnection.query (/root/works/firekylin/node_modules/mysql/lib/Connection.js:201:25)
+    at Promise (/root/works/firekylin/node_modules/think-helper/index.js:83:10)
+    at new Promise (<anonymous>)
+    at args (/root/works/firekylin/node_modules/think-helper/index.js:82:12)
+    at ThinkMysql.[think-mysql-query] (/root/works/firekylin/node_modules/think-mysql/index.js:169:12)
+    at getConnection.then.connection (/root/works/firekylin/node_modules/think-mysql/index.js:230:29)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:229:7)
+  code: 'ER_NO_SUCH_TABLE',
+  errno: 1146,
+  sqlMessage: 'Table \'mysql.fk_options\' doesn\'t exist',
+  sqlState: '42S02',
+  index: 0,
+  sql: 'SELECT * FROM `fk_options`' }
+[2019-05-28T13:48:01.636] [DEBUG] default - DROP TABLE IF EXISTS `fk_cate`
+[2019-05-28T13:48:01.640] [DEBUG] default - CREATE TABLE `fk_cate` (   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,   `name` varchar(255) NOT NULL,   `pid` int(11) NOT NULL DEFAULT '0',   `pathname` varchar(255) DEFAULT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `name` (`name`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.650] [DEBUG] default - DROP TABLE IF EXISTS `fk_options`
+[2019-05-28T13:48:01.651] [DEBUG] default - CREATE TABLE `fk_options` (   `key` varchar(255) NOT NULL DEFAULT '',   `value` text,   `desc` varchar(255) DEFAULT NULL,   PRIMARY KEY (`key`),   UNIQUE KEY `key` (`key`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.654] [DEBUG] default - INSERT INTO `fk_options` (`key`, `value`, `desc`) VALUES   ('analyze_code','','统计代码，可以添加百度统计、Google 统计等'),   ('auto_summary', '0', '自动摘要。0 为禁用，具体的数字为摘要截取的字符数'),   ('comment','{\"type\":\"duoshuo\",\"name\":\"welefen2013\"}','评论类型'),   ('description','A Simple & Fast Node Bloging Platform Base On ThinkJS 2.0 & ReactJS & ES6/7','网站描述'),   ('favicon_url','','favicon'),   ('github_blog','welefen/blog','GitHub blog 地址，如果填了则同步到 GitHub 上'),   ('github_url','https://github.com/75team/thinkjs','GitHub 地址'),   ('image_upload',NULL,'图片存放的位置，默认存在放网站上。也可以选择放在七牛或者又拍云等地方'),   ('keywords','www,fasdf,fasdfa','网站关键字'),   ('logo_url','/static/img/firekylin.jpg','logo 地址'),   ('miitbeian','wewww','网站备案号'),   ('postsListSize','10','文章一页显示的条数'),   ('password_salt','firekylin','密码 salt，网站安装的时候随机生成一个'),   ('push','0','是否允许推送'),   ('push_sites','','推送网站列表'),   ('site_url','http://127.0.0.1:8360','网站地址'),   ('theme','firekylin','主题名称'),   ('title','Firekylin 系统','网站标题'),   ('twitter_url','','微博地址'),   ('navigation', '[{"label":"首页","url":"/","option":"home"},{"label":"归档","url":"/archives/","option":"archive"},{"label":"标签","url":"/tags","option":"tags"},{"label":"关于","url":"/about","option":"user"},{"label":"友链","url":"/links","option":"link"}]', '导航菜单'),   ('two_factor_auth','','是否开启二步验证'),   ('upload',NULL,'上传配置，默认为本地，也可以选择七牛或者又拍云')
+[2019-05-28T13:48:01.657] [DEBUG] default - DROP TABLE IF EXISTS `fk_post`
+[2019-05-28T13:48:01.659] [DEBUG] default - CREATE TABLE `fk_post` (   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,   `user_id` int(10) unsigned NOT NULL,   `type` tinyint(11) NOT NULL DEFAULT '0' COMMENT '0 为文章，1 为页面',   `status` tinyint(11) NOT NULL DEFAULT '0' COMMENT '0 为草稿，1 为待审核，2 为已拒绝，3 为已经发布',   `title` varchar(255) NOT NULL,   `pathname` varchar(255) NOT NULL DEFAULT '' COMMENT 'URL 的 pathname',   `summary` longtext NOT NULL COMMENT '摘要',   `markdown_content` longtext NOT NULL,   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,   `allow_comment` tinyint(11) NOT NULL DEFAULT '1' COMMENT '1 为允许， 0 为不允许',   `create_time` datetime DEFAULT NULL,   `update_time` datetime NOT NULL,   `is_public` tinyint(11) NOT NULL DEFAULT '1' COMMENT '1 为公开，0 为不公开',   `comment_num` int(11) NOT NULL DEFAULT '0',   `options` text COMMENT '一些选项，JSON 结构',   PRIMARY KEY (`id`),   KEY `create_time` (`create_time`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.666] [DEBUG] default - DROP TABLE IF EXISTS `fk_post_cate`
+[2019-05-28T13:48:01.667] [DEBUG] default - CREATE TABLE `fk_post_cate` (   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   `post_id` int(11) NOT NULL,   `cate_id` int(11) NOT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `post_cate` (`post_id`,`cate_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.670] [DEBUG] default - DROP TABLE IF EXISTS `fk_post_history`
+[2019-05-28T13:48:01.672] [DEBUG] default - CREATE TABLE `fk_post_history` (   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   `post_id` int(11) DEFAULT NULL,   `markdown_content` text,   `update_user_id` int(11) DEFAULT NULL COMMENT '更新用户的 ID',   PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.674] [DEBUG] default - DROP TABLE IF EXISTS `fk_post_tag`
+[2019-05-28T13:48:01.675] [DEBUG] default - CREATE TABLE `fk_post_tag` (   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   `post_id` int(11) NOT NULL,   `tag_id` int(11) NOT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `post_tag` (`post_id`,`tag_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.678] [DEBUG] default - DROP TABLE IF EXISTS `fk_tag`
+[2019-05-28T13:48:01.679] [DEBUG] default - CREATE TABLE `fk_tag` (   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   `name` varchar(255) DEFAULT NULL,   `pathname` varchar(255) DEFAULT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `name` (`name`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:01.683] [DEBUG] default - DROP TABLE IF EXISTS `fk_user`
+[2019-05-28T13:48:01.684] [DEBUG] default - CREATE TABLE `fk_user` (   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,   `name` varchar(255) NOT NULL DEFAULT '',   `display_name` varchar(255) DEFAULT NULL,   `password` varchar(255) NOT NULL DEFAULT '',   `type` tinyint(11) NOT NULL DEFAULT '1' COMMENT '1 为管理员  2 为编辑',   `email` varchar(255) NOT NULL DEFAULT '',   `status` tinyint(11) NOT NULL DEFAULT '1' COMMENT '1 为有效 2 为禁用',   `create_time` datetime NOT NULL,   `create_ip` varchar(20) NOT NULL DEFAULT '',   `last_login_time` datetime NOT NULL,   `last_login_ip` varchar(20) NOT NULL DEFAULT '',   `app_key` varchar(255) DEFAULT NULL,   `app_secret` varchar(255) DEFAULT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `name` (`name`),   UNIQUE KEY `email` (`email`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+[2019-05-28T13:48:02.025] [DEBUG] default - clear cache
+[2019-05-28T13:48:15.804] [INFO] default - NORMAL VERIFY TYPE
+[2019-05-28T13:48:29.716] [INFO] default - NORMAL VERIFY TYPE
+[2019-05-28T13:50:17.535] [INFO] default - NORMAL VERIFY TYPE
